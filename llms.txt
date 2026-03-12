@@ -1,0 +1,121 @@
+# uncle-funkle
+
+`uncle-funkle` is a Rust CLI and library for scanning a codebase for maintainability issues, storing them as persistent issues, scoring the project, and generating a prioritized cleanup plan.
+
+This file is written for LLMs and automation agents.
+
+## Install
+
+Preferred for end users:
+
+- Download a prebuilt binary from the GitHub Releases page for this repository.
+
+Build from source:
+
+- `cargo build --release`
+
+The binary will be at:
+
+- `target/release/uncle-funkle`
+- on Windows: `target/release/uncle-funkle.exe`
+
+## Basic usage
+
+The CLI stores state in the target project under:
+
+- `.uncle_funkle/state.json`
+
+Most commands default to the current directory if no path is provided.
+
+### Scan a project
+
+- `uncle-funkle scan`
+- `uncle-funkle scan path/to/project`
+
+Behavior:
+
+- scans source files
+- merges findings into persisted state
+- recomputes scores
+- prints a summary and the current next item
+
+### Show status without rescanning
+
+- `uncle-funkle status`
+- `uncle-funkle status path/to/project`
+- `uncle-funkle status path/to/project ISSUE_ID`
+
+Behavior:
+
+- loads saved state only
+- without `ISSUE_ID`, shows the current next item
+- with `ISSUE_ID`, shows that specific issue
+
+### List issues
+
+- `uncle-funkle list`
+- `uncle-funkle list path/to/project`
+- `uncle-funkle list path/to/project --all`
+
+Behavior:
+
+- default: lists open issues only
+- `--all`: includes resolved, deferred, and dismissed issues
+
+### Progress work
+
+- `uncle-funkle next`
+
+Behavior:
+
+- resolves the current next issue
+- saves state
+- prints the new next item
+
+Direct issue state changes:
+
+- `uncle-funkle resolve ISSUE_ID`
+- `uncle-funkle defer ISSUE_ID`
+- `uncle-funkle dismiss ISSUE_ID`
+- `uncle-funkle reopen ISSUE_ID`
+
+Optional path can be provided as the final argument:
+
+- `uncle-funkle resolve ISSUE_ID path/to/project`
+
+Examples:
+
+- `uncle-funkle scan`
+- `uncle-funkle status`
+- `uncle-funkle list --all`
+- `uncle-funkle next`
+- `uncle-funkle resolve ISSUE_ID`
+
+## What the tool looks for
+
+Default detectors include:
+
+- TODO / FIXME / HACK / XXX comments
+- debug artifacts
+- large files
+- long lines
+- long functions
+- deep nesting
+- high branch density
+- duplicate code blocks
+
+## Recommended agent workflow
+
+1. Run `uncle-funkle --json scan <path>`.
+2. Read the summary and current `next` item.
+3. Inspect or edit the target code outside this tool.
+4. Mark progress with `next`, `resolve`, `defer`, `dismiss`, or `reopen`.
+5. Re-run `scan` after code changes.
+
+## Notes for LLMs
+
+- Prefer `--json` over text output.
+- Treat issue IDs as stable handles for follow-up commands.
+- `next` advances one issue, not an entire project-wide cleanup pass.
+- `status` does not rescan; use `scan` after code changes.
+- If state does not exist yet, run `scan` first.
