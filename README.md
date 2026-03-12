@@ -1,4 +1,6 @@
-# UNcle FUnKle (UN-FUK for short)
+# Uncle Funkle (UN-FUK for short)
+
+![Uncle Funkle](assets//uncle-funkle.png)
 
 `uncle-funkle` is a Rust library and CLI for scanning a codebase for maintainability problems, storing them as persistent issues, scoring the project, and generating a prioritized cleanup plan.
 
