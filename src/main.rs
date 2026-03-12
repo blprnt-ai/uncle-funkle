@@ -8,7 +8,7 @@ use uncle_funkle::{
 };
 
 #[derive(Parser, Debug)]
-#[command(name = "uncle-funkle")]
+#[command(name = "unfuk")]
 #[command(about = "Scan a codebase or inspect saved state")]
 struct Cli {
     #[command(subcommand)]

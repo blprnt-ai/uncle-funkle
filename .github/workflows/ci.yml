@@ -28,17 +28,17 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            artifact_name: uncle-funkle-linux
-            binary_path: target/release/uncle-funkle
-            asset_name: uncle-funkle-linux
+            artifact_name: unfuk-linux
+            binary_path: target/release/unfuk
+            asset_name: unfuk-linux
           - os: windows-latest
-            artifact_name: uncle-funkle-windows
-            binary_path: target/release/uncle-funkle.exe
-            asset_name: uncle-funkle-windows.exe
+            artifact_name: unfuk-windows
+            binary_path: target/release/unfuk.exe
+            asset_name: unfuk-windows.exe
           - os: macos-latest
-            artifact_name: uncle-funkle-macos
-            binary_path: target/release/uncle-funkle
-            asset_name: uncle-funkle-macos
+            artifact_name: unfuk-macos
+            binary_path: target/release/unfuk
+            asset_name: unfuk-macos
     runs-on: ${{ matrix.os }}
     permissions:
       contents: write

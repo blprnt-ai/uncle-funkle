@@ -13,6 +13,10 @@ categories = ["development-tools", "development-tools::testing"]
 name = "uncle_funkle"
 path = "src/lib.rs"
 
+[[bin]]
+name = "unfuk"
+path = "src/main.rs"
+
 [dependencies]
 blake3 = "1"
 clap = { version = "4", features = ["derive"] }
