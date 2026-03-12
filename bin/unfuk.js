@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { spawnSync } = require('node:child_process');
+const fs = require('node:fs');
 const path = require('node:path');
 
 const TARGETS = {
@@ -32,6 +33,12 @@ try {
 } catch (error) {
   console.error(`Missing optional dependency ${target.pkg} for ${process.platform}-${process.arch}.`);
   process.exit(1);
+}
+
+try {
+  fs.chmodSync(binaryPath, 0o755);
+} catch (error) {
+  // Ignore chmod failures and let execution surface the real error.
 }
 
 const result = spawnSync(binaryPath, process.argv.slice(2), { stdio: 'inherit' });

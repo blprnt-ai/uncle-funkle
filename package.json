@@ -1,6 +1,6 @@
 {
   "name": "@blprnt/unfuk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Run the unfuk CLI via npm.",
   "license": "MIT",
   "scripts": {
@@ -17,8 +17,11 @@
     "access": "public"
   },
   "optionalDependencies": {
-    "@blprnt/unfuk-darwin-arm64": "0.1.1",
-    "@blprnt/unfuk-linux-x64": "0.1.1",
-    "@blprnt/unfuk-win32-x64": "0.1.1"
+    "@blprnt/unfuk-darwin-arm64": "0.1.2",
+    "@blprnt/unfuk-linux-x64": "0.1.2",
+    "@blprnt/unfuk-win32-x64": "0.1.2"
+  },
+  "dependencies": {
+    "@blprnt/unfuk": "^0.1.2"
   }
 }
