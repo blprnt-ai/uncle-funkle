@@ -106,7 +106,7 @@ Default detectors include:
 
 ## Recommended agent workflow
 
-1. Run `uncle-funkle --json scan <path>`.
+1. Run `uncle-funkle scan <path>`.
 2. Read the summary and current `next` item.
 3. Inspect or edit the target code outside this tool.
 4. Mark progress with `next`, `resolve`, `defer`, `dismiss`, or `reopen`.
@@ -114,7 +114,6 @@ Default detectors include:
 
 ## Notes for LLMs
 
-- Prefer `--json` over text output.
 - Treat issue IDs as stable handles for follow-up commands.
 - `next` advances one issue, not an entire project-wide cleanup pass.
 - `status` does not rescan; use `scan` after code changes.
