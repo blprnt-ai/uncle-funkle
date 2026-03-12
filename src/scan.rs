@@ -209,7 +209,7 @@ async fn analyze_file(
     let rendered = path.strip_prefix(&root).unwrap_or(&path);
     let relative_path = to_unix_path(rendered);
 
-    if bytes.iter().any(|byte| *byte == 0) || bytes.len() > config.max_file_bytes {
+    if bytes.contains(&0) || bytes.len() > config.max_file_bytes {
         return Ok(FileAnalysis {
             summary: FileSummary {
                 path: relative_path,
@@ -672,7 +672,7 @@ fn detect_duplicate_blocks(analyses: &[FileAnalysis], config: &Config) -> Vec<Fi
         })
         .collect();
 
-    ranked.sort_by(|left, right| right.1.len().cmp(&left.1.len()));
+    ranked.sort_by_key(|item| std::cmp::Reverse(item.1.len()));
     ranked.truncate(config.thresholds.max_duplicate_reports);
 
     ranked
@@ -756,12 +756,17 @@ fn extract_brace_functions(language: &LanguageKind, lines: &[String]) -> Vec<Fun
         };
 
         let mut brace_index = None;
-        for probe in index..lines.len().min(index + 4) {
-            if lines[probe].contains('{') {
+        for (probe, line) in lines
+            .iter()
+            .enumerate()
+            .take(lines.len().min(index + 4))
+            .skip(index)
+        {
+            if line.contains('{') {
                 brace_index = Some(probe);
                 break;
             }
-            if lines[probe].trim_end().ends_with(';') {
+            if line.trim_end().ends_with(';') {
                 break;
             }
         }
@@ -777,8 +782,8 @@ fn extract_brace_functions(language: &LanguageKind, lines: &[String]) -> Vec<Fun
         let mut found_body = false;
         let mut end = start_brace_index;
 
-        for probe in index..lines.len() {
-            let code = code_portion(language, &lines[probe]);
+        for (probe, line) in lines.iter().enumerate().skip(index) {
+            let code = code_portion(language, line);
             branch_points += count_branch_points(code);
             let delta = brace_delta(code);
             if delta > 0 {
@@ -928,7 +933,7 @@ fn dedupe_duplicate_occurrences(
     for occurrence in occurrences {
         let should_skip = deduped
             .last()
-            .map_or(false, |previous: &DuplicateOccurrence| {
+            .is_some_and(|previous: &DuplicateOccurrence| {
                 previous.path == occurrence.path && occurrence.start_line <= previous.end_line
             });
         if !should_skip {

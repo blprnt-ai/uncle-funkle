@@ -45,7 +45,7 @@ pub fn stable_issue_id(fingerprint: &str) -> String {
 
 pub fn humanize_detector(detector: &str) -> String {
     let mut out = String::new();
-    let raw = detector.replace('.', " ").replace('_', " ");
+    let raw = detector.replace(['.', '_'], " ");
     for (index, token) in raw.split_whitespace().enumerate() {
         if index > 0 {
             out.push(' ');
@@ -60,7 +60,7 @@ pub fn humanize_detector(detector: &str) -> String {
 }
 
 pub fn clamp_score(value: f32) -> f32 {
-    value.max(0.0).min(100.0)
+    value.clamp(0.0, 100.0)
 }
 
 pub fn round1(value: f32) -> f32 {

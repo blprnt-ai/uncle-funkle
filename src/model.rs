@@ -6,11 +6,12 @@ use serde_json::Value;
 
 use crate::util::now_rfc3339;
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub enum Tier {
     #[serde(rename = "T1")]
     T1,
     #[serde(rename = "T2")]
+    #[default]
     T2,
     #[serde(rename = "T3")]
     T3,
@@ -38,21 +39,16 @@ impl Tier {
     }
 }
 
-impl Default for Tier {
-    fn default() -> Self {
-        Self::T2
-    }
-}
-
 impl fmt::Display for Tier {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         f.write_str(self.as_str())
     }
 }
 
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub enum Confidence {
     Low,
+    #[default]
     Medium,
     High,
 }
@@ -83,14 +79,9 @@ impl Confidence {
     }
 }
 
-impl Default for Confidence {
-    fn default() -> Self {
-        Self::Medium
-    }
-}
-
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub enum IssueStatus {
+    #[default]
     Open,
     Resolved,
     Deferred,
@@ -108,14 +99,9 @@ impl IssueStatus {
     }
 }
 
-impl Default for IssueStatus {
-    fn default() -> Self {
-        Self::Open
-    }
-}
-
-#[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
 pub enum IssueSource {
+    #[default]
     Mechanical,
     Subjective,
 }
@@ -126,12 +112,6 @@ impl IssueSource {
             Self::Mechanical => "mechanical",
             Self::Subjective => "subjective",
         }
-    }
-}
-
-impl Default for IssueSource {
-    fn default() -> Self {
-        Self::Mechanical
     }
 }
 

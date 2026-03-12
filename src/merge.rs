@@ -7,7 +7,7 @@ use crate::model::{
 use crate::scoring::recompute_scores;
 use crate::util::{now_rfc3339, stable_hash, stable_issue_id};
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize, PartialEq)]
+#[derive(Debug, Clone, Default, serde::Serialize, serde::Deserialize, PartialEq)]
 #[serde(default)]
 pub struct MergeSummary {
     pub added: usize,
@@ -19,31 +19,17 @@ pub struct MergeSummary {
     pub metadata: Option<ScanMetadata>,
 }
 
-impl Default for MergeSummary {
-    fn default() -> Self {
-        Self {
-            added: 0,
-            updated: 0,
-            reopened: 0,
-            auto_resolved: 0,
-            total_open: 0,
-            scores: ScoreSnapshot::default(),
-            metadata: None,
-        }
-    }
-}
-
 pub fn merge_scan_report(state: &mut State, report: ScanReport) -> MergeSummary {
     let seen_at = report.generated_at.clone();
     let active_ids: BTreeSet<String> = report.findings.iter().map(|finding| finding.id.clone()).collect();
     let previous_mechanical_ids: Vec<String> = state
         .issues
         .iter()
-        .filter_map(|(id, issue)| {
-            (issue.source == IssueSource::Mechanical
-                && matches!(issue.status, IssueStatus::Open | IssueStatus::Deferred))
-            .then(|| id.clone())
+        .filter(|(_, issue)| {
+            issue.source == IssueSource::Mechanical
+                && matches!(issue.status, IssueStatus::Open | IssueStatus::Deferred)
         })
+        .map(|(id, _)| id.clone())
         .collect();
 
     let mut summary = MergeSummary {
@@ -106,10 +92,11 @@ pub fn import_assessment(state: &mut State, import: AssessmentImport) -> MergeSu
     let previous_subjective_ids: Vec<String> = state
         .issues
         .iter()
-        .filter_map(|(id, issue)| {
-            (issue.detector == detector && matches!(issue.status, IssueStatus::Open | IssueStatus::Deferred))
-                .then(|| id.clone())
+        .filter(|(_, issue)| {
+            issue.detector == detector
+                && matches!(issue.status, IssueStatus::Open | IssueStatus::Deferred)
         })
+        .map(|(id, _)| id.clone())
         .collect();
 
     let mut summary = MergeSummary::default();
