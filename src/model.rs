@@ -6,7 +6,9 @@ use serde_json::Value;
 
 use crate::util::now_rfc3339;
 
-#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(
+    Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd,
+)]
 pub enum Tier {
     #[serde(rename = "T1")]
     T1,
@@ -45,7 +47,9 @@ impl fmt::Display for Tier {
     }
 }
 
-#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(
+    Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd,
+)]
 pub enum Confidence {
     Low,
     #[default]
@@ -79,7 +83,9 @@ impl Confidence {
     }
 }
 
-#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(
+    Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd,
+)]
 pub enum IssueStatus {
     #[default]
     Open,
@@ -99,7 +105,9 @@ impl IssueStatus {
     }
 }
 
-#[derive(Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd)]
+#[derive(
+    Debug, Clone, Copy, Default, Serialize, Deserialize, PartialEq, Eq, Hash, Ord, PartialOrd,
+)]
 pub enum IssueSource {
     #[default]
     Mechanical,

@@ -86,9 +86,7 @@ pub fn language_from_path(path: &Path) -> LanguageKind {
         Some("kt") | Some("kts") => LanguageKind::Kotlin,
         Some("rb") => LanguageKind::Ruby,
         Some("c") | Some("h") => LanguageKind::C,
-        Some("cc") | Some("cpp") | Some("cxx") | Some("hpp") | Some("hh") => {
-            LanguageKind::Cpp
-        }
+        Some("cc") | Some("cpp") | Some("cxx") | Some("hpp") | Some("hh") => LanguageKind::Cpp,
         Some("swift") => LanguageKind::Swift,
         Some(other) => LanguageKind::Other(other.to_string()),
         None => LanguageKind::Other("unknown".to_string()),

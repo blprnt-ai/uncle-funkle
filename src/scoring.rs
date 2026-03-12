@@ -1,4 +1,6 @@
-use crate::model::{Confidence, Issue, IssueSource, IssueStatus, ScoreSnapshot, State, Stats, Tier};
+use crate::model::{
+    Confidence, Issue, IssueSource, IssueStatus, ScoreSnapshot, State, Stats, Tier,
+};
 use crate::util::{clamp_score, round1};
 
 pub fn recompute_scores(state: &mut State) -> ScoreSnapshot {

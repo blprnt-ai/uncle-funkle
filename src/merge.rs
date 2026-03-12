@@ -1,8 +1,8 @@
 use std::collections::BTreeSet;
 
 use crate::model::{
-    AssessmentImport, Finding, Issue, IssueSource, IssueStatus, Location, ScoreSnapshot,
-    SubjectiveAssessment, SubjectiveFindingImport, ScanMetadata, ScanReport, State,
+    AssessmentImport, Finding, Issue, IssueSource, IssueStatus, Location, ScanMetadata, ScanReport,
+    ScoreSnapshot, State, SubjectiveAssessment, SubjectiveFindingImport,
 };
 use crate::scoring::recompute_scores;
 use crate::util::{now_rfc3339, stable_hash, stable_issue_id};
@@ -21,7 +21,11 @@ pub struct MergeSummary {
 
 pub fn merge_scan_report(state: &mut State, report: ScanReport) -> MergeSummary {
     let seen_at = report.generated_at.clone();
-    let active_ids: BTreeSet<String> = report.findings.iter().map(|finding| finding.id.clone()).collect();
+    let active_ids: BTreeSet<String> = report
+        .findings
+        .iter()
+        .map(|finding| finding.id.clone())
+        .collect();
     let previous_mechanical_ids: Vec<String> = state
         .issues
         .iter()
@@ -240,7 +244,11 @@ fn apply_finding_to_issue(issue: &mut Issue, finding: &Finding, seen_at: &str) {
     issue.last_seen = seen_at.to_string();
 }
 
-fn finding_from_subjective(dimension: &str, index: usize, finding: &SubjectiveFindingImport) -> Finding {
+fn finding_from_subjective(
+    dimension: &str,
+    index: usize,
+    finding: &SubjectiveFindingImport,
+) -> Finding {
     let fingerprint = stable_hash([
         "subjective",
         dimension,
@@ -271,7 +279,11 @@ fn finding_from_subjective(dimension: &str, index: usize, finding: &SubjectiveFi
     }
 }
 
-fn subjective_finding_to_id(dimension: &str, index: usize, finding: &SubjectiveFindingImport) -> String {
+fn subjective_finding_to_id(
+    dimension: &str,
+    index: usize,
+    finding: &SubjectiveFindingImport,
+) -> String {
     let fingerprint = stable_hash([
         "subjective",
         dimension,
