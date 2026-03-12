@@ -2,6 +2,8 @@ name: ci
 
 on:
   push:
+    tags:
+      - 'v*'
   pull_request:
 
 jobs:
@@ -17,3 +19,42 @@ jobs:
       - run: cargo fmt --all -- --check
       - run: cargo clippy --all-targets --all-features -- -D warnings
       - run: cargo test --all-targets --all-features
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            artifact_name: uncle-funkle-linux
+            binary_path: target/release/uncle-funkle
+            asset_name: uncle-funkle-linux
+          - os: windows-latest
+            artifact_name: uncle-funkle-windows
+            binary_path: target/release/uncle-funkle.exe
+            asset_name: uncle-funkle-windows.exe
+          - os: macos-latest
+            artifact_name: uncle-funkle-macos
+            binary_path: target/release/uncle-funkle
+            asset_name: uncle-funkle-macos
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.94.0
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --release
+      - name: Stage release asset
+        shell: bash
+        run: |
+          mkdir -p release
+          cp "${{ matrix.binary_path }}" "release/${{ matrix.asset_name }}"
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/${{ matrix.asset_name }}
