@@ -49,10 +49,16 @@ The public surface is built around:
 - generating the next cleanup plan item
 - resolving, deferring, dismissing, or reopening issues
 
-The CLI supports two commands:
+The CLI supports a small workflow surface:
 
-- `scan` — scans a target directory, updates persisted state, and prints a summary
-- `status` — loads persisted state and prints the current summary without scanning
+- `scan [path]` — scans a target directory, updates persisted state, and prints a summary plus the current next item
+- `status [path] [issue_id]` — loads persisted state and prints the current next item, or the requested issue when an ID is provided
+- `list [path] [--all]` — lists open issues by default or every issue with `--all`
+- `next [path]` — resolves the current next issue and returns the new next item
+- `resolve <issue_id> [path]`
+- `defer <issue_id> [path]`
+- `dismiss <issue_id> [path]`
+- `reopen <issue_id> [path]`
 
 ## Usage
 
@@ -71,11 +77,20 @@ Show saved status without rescanning:
 
 - `uncle-funkle status`
 - `uncle-funkle status path/to/project`
+- `uncle-funkle status path/to/project issue_123`
 
-Use JSON output when you want machine-readable results:
+List issues:
 
-- `uncle-funkle --json scan`
-- `uncle-funkle --json status path/to/project`
+- `uncle-funkle list`
+- `uncle-funkle list path/to/project --all`
+
+Advance or update issue state:
+
+- `uncle-funkle next`
+- `uncle-funkle resolve issue_123`
+- `uncle-funkle defer issue_123 path/to/project`
+- `uncle-funkle dismiss issue_123`
+- `uncle-funkle reopen issue_123`
 
 Each scan updates `.uncle_funkle/state.json` in the target project.
 
