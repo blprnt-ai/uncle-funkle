@@ -1,6 +1,6 @@
 # uncle-funkle
 
-`uncle-funkle` is a Rust CLI and library for scanning a codebase for maintainability issues, storing them as persistent issues, scoring the project, and generating a prioritized cleanup plan.
+`uncle-funkle` is a Rust CLI and library for scanning a codebase for maintainability issues, storing them as persistent issues, scoring the project, and generating a prioritized cleanup plan. The executable is `unfuk`, and the npm entrypoint is `npx @blprnt/unfuk`.
 
 This file is written for LLMs and automation agents.
 
@@ -8,6 +8,8 @@ This file is written for LLMs and automation agents.
 
 Preferred for end users:
 
+- Run via npm: `npx @blprnt/unfuk`
+- Supported npm-distributed prebuilt targets: darwin-arm64, linux-x64, and win32-x64.
 - Download a prebuilt binary from the GitHub Releases page for this repository.
 
 Build from source:
@@ -16,8 +18,8 @@ Build from source:
 
 The binary will be at:
 
-- `target/release/uncle-funkle`
-- on Windows: `target/release/uncle-funkle.exe`
+- `target/release/unfuk`
+- on Windows: `target/release/unfuk.exe`
 
 ## Basic usage
 
@@ -29,8 +31,9 @@ Most commands default to the current directory if no path is provided.
 
 ### Scan a project
 
-- `uncle-funkle scan`
-- `uncle-funkle scan path/to/project`
+- `unfuk scan`
+- `unfuk scan path/to/project`
+- `npx @blprnt/unfuk scan`
 
 Behavior:
 
@@ -41,9 +44,9 @@ Behavior:
 
 ### Show status without rescanning
 
-- `uncle-funkle status`
-- `uncle-funkle status path/to/project`
-- `uncle-funkle status path/to/project ISSUE_ID`
+- `unfuk status`
+- `unfuk status path/to/project`
+- `unfuk status path/to/project ISSUE_ID`
 
 Behavior:
 
@@ -53,9 +56,9 @@ Behavior:
 
 ### List issues
 
-- `uncle-funkle list`
-- `uncle-funkle list path/to/project`
-- `uncle-funkle list path/to/project --all`
+- `unfuk list`
+- `unfuk list path/to/project`
+- `unfuk list path/to/project --all`
 
 Behavior:
 
@@ -64,7 +67,7 @@ Behavior:
 
 ### Progress work
 
-- `uncle-funkle next`
+- `unfuk next`
 
 Behavior:
 
@@ -74,22 +77,22 @@ Behavior:
 
 Direct issue state changes:
 
-- `uncle-funkle resolve ISSUE_ID`
-- `uncle-funkle defer ISSUE_ID`
-- `uncle-funkle dismiss ISSUE_ID`
-- `uncle-funkle reopen ISSUE_ID`
+- `unfuk resolve ISSUE_ID`
+- `unfuk defer ISSUE_ID`
+- `unfuk dismiss ISSUE_ID`
+- `unfuk reopen ISSUE_ID`
 
 Optional path can be provided as the final argument:
 
-- `uncle-funkle resolve ISSUE_ID path/to/project`
+- `unfuk resolve ISSUE_ID path/to/project`
 
 Examples:
 
-- `uncle-funkle scan`
-- `uncle-funkle status`
-- `uncle-funkle list --all`
-- `uncle-funkle next`
-- `uncle-funkle resolve ISSUE_ID`
+- `unfuk scan`
+- `unfuk status`
+- `unfuk list --all`
+- `unfuk next`
+- `unfuk resolve ISSUE_ID`
 
 ## What the tool looks for
 
@@ -106,7 +109,7 @@ Default detectors include:
 
 ## Recommended agent workflow
 
-1. Run `uncle-funkle scan <path>`.
+1. Run `unfuk scan <path>`.
 2. Read the summary and current `next` item.
 3. Inspect or edit the target code outside this tool.
 4. Mark progress with `next`, `resolve`, `defer`, `dismiss`, or `reopen`.

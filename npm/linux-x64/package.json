@@ -1,0 +1,15 @@
+{
+  "name": "@blprnt/unfuk-linux-x64",
+  "version": "0.1.1",
+  "description": "Prebuilt unfuk binary for linux x64",
+  "license": "MIT",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "files": [
+    "unfuk"
+  ]
+}

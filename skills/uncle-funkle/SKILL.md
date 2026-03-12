@@ -5,11 +5,13 @@ description: Use this skill when working with the uncle-funkle Rust CLI to scan 
 
 # Using Uncle Funkle
 
-Use this skill when you need to inspect or progress code-quality cleanup work with `uncle-funkle`.
+Use this skill when you need to inspect or progress code-quality cleanup work with `unfuk` or `npx @blprnt/unfuk`.
+
+Supported npm-distributed prebuilt targets: darwin-arm64, linux-x64, and win32-x64.
 
 ## What The Tool Does
 
-`uncle-funkle` scans a repository for maintainability issues, stores them as persistent issues in `.uncle_funkle/state.json`, scores the codebase, and surfaces the next item to fix.
+`unfuk` scans a repository for maintainability issues, stores them as persistent issues in `.uncle_funkle/state.json`, scores the codebase, and surfaces the next item to fix.
 
 It is useful for:
 
@@ -26,8 +28,9 @@ Most commands default to the current directory when no path is provided.
 ### Scan
 
 ```bash
-uncle-funkle scan
-uncle-funkle scan path/to/project
+unfuk scan
+unfuk scan path/to/project
+npx @blprnt/unfuk scan
 ```
 
 Behavior:
@@ -40,9 +43,9 @@ Behavior:
 ### Status
 
 ```bash
-uncle-funkle status
-uncle-funkle status path/to/project
-uncle-funkle status path/to/project ISSUE_ID
+unfuk status
+unfuk status path/to/project
+unfuk status path/to/project ISSUE_ID
 ```
 
 Behavior:
@@ -54,9 +57,9 @@ Behavior:
 ### List
 
 ```bash
-uncle-funkle list
-uncle-funkle list path/to/project
-uncle-funkle list path/to/project --all
+unfuk list
+unfuk list path/to/project
+unfuk list path/to/project --all
 ```
 
 Behavior:
@@ -67,12 +70,12 @@ Behavior:
 ### Progress Work
 
 ```bash
-uncle-funkle next
-uncle-funkle resolve ISSUE_ID
-uncle-funkle defer ISSUE_ID
-uncle-funkle dismiss ISSUE_ID
-uncle-funkle reopen ISSUE_ID
-uncle-funkle resolve ISSUE_ID path/to/project
+unfuk next
+unfuk resolve ISSUE_ID
+unfuk defer ISSUE_ID
+unfuk dismiss ISSUE_ID
+unfuk reopen ISSUE_ID
+unfuk resolve ISSUE_ID path/to/project
 ```
 
 Behavior:
@@ -82,7 +85,7 @@ Behavior:
 
 ## Recommended Agent Workflow
 
-1. Run `uncle-funkle scan <path>`.
+1. Run `unfuk scan <path>`.
 2. Read the summary and current next item.
 3. Inspect and edit code outside this tool.
 4. Use `resolve`, `defer`, `dismiss`, `reopen`, or `next` to update state.

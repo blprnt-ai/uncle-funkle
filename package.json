@@ -1,0 +1,24 @@
+{
+  "name": "@blprnt/unfuk",
+  "version": "0.1.1",
+  "description": "Run the unfuk CLI via npm.",
+  "license": "MIT",
+  "scripts": {
+    "check:version-sync": "node scripts/check-version-sync.js",
+    "prepare": "node scripts/setup-git-hooks.js"
+  },
+  "bin": {
+    "unfuk": "bin/unfuk.js"
+  },
+  "files": [
+    "bin/unfuk.js"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "optionalDependencies": {
+    "@blprnt/unfuk-darwin-arm64": "0.1.1",
+    "@blprnt/unfuk-linux-x64": "0.1.1",
+    "@blprnt/unfuk-win32-x64": "0.1.1"
+  }
+}

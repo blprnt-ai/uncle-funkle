@@ -8,6 +8,8 @@ It focuses on practical heuristics like leftover TODOs, debug artifacts, oversiz
 
 ## Built For Agents
 
+`unfuk` is the CLI entrypoint, and `npx @blprnt/unfuk` is the npm entrypoint.
+
 `uncle-funkle` is built to be useful in agent-driven workflows.
 
 - the CLI gives an agent a simple way to scan a repo or inspect saved state
@@ -64,7 +66,13 @@ The CLI supports a small workflow surface:
 
 ## Usage
 
-Download a prebuilt binary from the GitHub Releases page.
+Run without installing:
+
+- `npx @blprnt/unfuk scan`
+
+Supported npm-distributed prebuilt targets: darwin-arm64, linux-x64, and win32-x64.
+
+Or download a prebuilt binary from the GitHub Releases page.
 
 If you prefer building locally:
 
@@ -72,27 +80,28 @@ If you prefer building locally:
 
 Run a scan:
 
-- `uncle-funkle scan`
-- `uncle-funkle scan path/to/project`
+- `unfuk scan`
+- `unfuk scan path/to/project`
+- `npx @blprnt/unfuk scan`
 
 Show saved status without rescanning:
 
-- `uncle-funkle status`
-- `uncle-funkle status path/to/project`
-- `uncle-funkle status path/to/project issue_123`
+- `unfuk status`
+- `unfuk status path/to/project`
+- `unfuk status path/to/project issue_123`
 
 List issues:
 
-- `uncle-funkle list`
-- `uncle-funkle list path/to/project --all`
+- `unfuk list`
+- `unfuk list path/to/project --all`
 
 Advance or update issue state:
 
-- `uncle-funkle next`
-- `uncle-funkle resolve issue_123`
-- `uncle-funkle defer issue_123 path/to/project`
-- `uncle-funkle dismiss issue_123`
-- `uncle-funkle reopen issue_123`
+- `unfuk next`
+- `unfuk resolve issue_123`
+- `unfuk defer issue_123 path/to/project`
+- `unfuk dismiss issue_123`
+- `unfuk reopen issue_123`
 
 Each scan updates `.uncle_funkle/state.json` in the target project.
 

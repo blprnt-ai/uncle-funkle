@@ -1,0 +1,15 @@
+{
+  "name": "@blprnt/unfuk-darwin-arm64",
+  "version": "0.1.1",
+  "description": "Prebuilt unfuk binary for darwin arm64",
+  "license": "MIT",
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "files": [
+    "unfuk"
+  ]
+}

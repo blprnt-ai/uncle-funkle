@@ -1,0 +1,15 @@
+{
+  "name": "@blprnt/unfuk-win32-x64",
+  "version": "0.1.1",
+  "description": "Prebuilt unfuk binary for win32 x64",
+  "license": "MIT",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "files": [
+    "unfuk.exe"
+  ]
+}
