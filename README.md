@@ -7,6 +7,8 @@
 
 It focuses on practical heuristics like leftover TODOs, debug artifacts, oversized files, long functions, deep nesting, branch-heavy code, long lines, and duplicate blocks.
 
+Basically, it UNFUKs what sloppy AI and videcoding leaves behind.
+
 ## Use
 
 ```sh
