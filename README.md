@@ -1,4 +1,5 @@
 # Uncle Funkle (UNFUK for short)
+[![ci](https://github.com/blprnt-ai/uncle-funkle/actions/workflows/ci.yml/badge.svg)](https://github.com/blprnt-ai/uncle-funkle/actions/workflows/ci.yml)
 
 ![Uncle Funkle](assets//uncle-funkle.png)
 
