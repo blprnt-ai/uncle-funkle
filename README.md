@@ -6,9 +6,19 @@
 
 It focuses on practical heuristics like leftover TODOs, debug artifacts, oversized files, long functions, deep nesting, branch-heavy code, long lines, and duplicate blocks.
 
+## Use
+
+```sh
+npm i -g @blprnt/unfuk
+unfuk scan
+```
+
+```sh
+npx @blprnt/unfuk scan
+```
+
 ## Built For Agents
 
-`unfuk` is the CLI entrypoint, and `npx @blprnt/unfuk` is the npm entrypoint.
 
 `uncle-funkle` is built to be useful in agent-driven workflows.
 
