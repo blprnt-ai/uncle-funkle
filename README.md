@@ -1,4 +1,4 @@
-# Uncle Funkle (UN-FUK for short)
+# Uncle Funkle (UNFUK for short)
 
 ![Uncle Funkle](assets//uncle-funkle.png)
 
